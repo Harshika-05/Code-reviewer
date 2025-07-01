@@ -13,6 +13,18 @@ import "highlight.js/styles/github-dark.css";
 
 import Editor from 'react-simple-code-editor';
 
+// Import PrismJS languages dynamically if needed
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-java";
+import "prismjs/components/prism-c";
+import "prismjs/components/prism-cpp";
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-ruby";
+import "prismjs/components/prism-php";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-csharp";
+import "prismjs/components/prism-rust";
+
 function App() {
   const [count, setCount] = useState(0)
   const [code, setCode] = useState(`
@@ -22,16 +34,18 @@ function App() {
   `);
   const [review, setReview] = useState("");
   const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState("javascript");
   useEffect(() =>{
     prism.highlightAll();
   })
 
-async function reviewCode(){
-  setLoading(true);
-  const response = await axios.post('http://localhost:3000/ai/get-review' , { code });
-  setReview(response.data);
-  setLoading(false);
-}
+  async function reviewCode(){
+    setLoading(true);
+    // Send both code and language to the backend
+    const response = await axios.post('http://localhost:3000/ai/get-review' , { code, language });
+    setReview(response.data);
+    setLoading(false);
+  }
 
   return (
     <>
@@ -40,11 +54,34 @@ async function reviewCode(){
           <div className="heading">
             <h2>YOUR CODE</h2>
           </div>
+          {/* Language selection dropdown */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label htmlFor="language-select" style={{ marginRight: '0.5rem', fontWeight: 500 }}>Language:</label>
+            <select
+              id="language-select"
+              value={language}
+              onChange={e => setLanguage(e.target.value)}
+              style={{ padding: '0.3rem 1rem', borderRadius: '4px', fontSize: '1rem' }}
+            >
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+              <option value="go">Go</option>
+              <option value="ruby">Ruby</option>
+              <option value="php">PHP</option>
+              <option value="typescript">TypeScript</option>
+              <option value="csharp">C#</option>
+              <option value="rust">Rust</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
           <div className="code">
             <Editor
               value={code}
               onValueChange={code => setCode(code)  }
-              highlight={code => prism.highlight(code, prism.languages.javascript , "javascript")}
+              highlight={code => code}
               padding={10}
               style={{
                 fontFamily: '"Fira code", "Fira Mono", monospace',
