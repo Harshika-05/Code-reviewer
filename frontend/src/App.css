@@ -1,0 +1,107 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+main .left,
+main .right {
+  height: 100%;
+  flex-basis: 50%;
+  border-radius: 0.7rem;
+}
+
+main .left {
+  background-color: #000000;
+  position: relative;
+}
+
+.left .code,
+.code pre,
+.code pre code {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border-radius: 0.7rem;
+  background-color: #0c0c0c;
+}
+
+.left .heading{
+  text-align: center;
+  padding: 0.6rem;
+  background-color: #4b4a4a;
+  border-radius: 0.7rem;
+  color : rgb(247, 247, 184)
+}
+
+.right .heading{
+  text-align: center;
+  padding: 0.6rem;
+  background-color: #4b4a4a;
+  border-radius: 0.7rem;
+  color : rgb(247, 247, 184)
+}
+
+main .left .review {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: rgb(219, 219, 255);
+  color: #000000;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.7rem;
+}
+
+
+main .right {
+  background-color: #343434;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  overflow: auto;
+}
+
+.review-btn {
+  margin-top: 16px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: linear-gradient(90deg, #007cf0 0%, #00dfd8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.review-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #005fa3 0%, #00b3a4 100%);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.review-btn:active:not(:disabled) {
+  background: linear-gradient(90deg, #003e6b 0%, #008c7a 100%);
+  transform: scale(0.98);
+}
+.review-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
