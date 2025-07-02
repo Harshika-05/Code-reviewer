@@ -25,6 +25,8 @@ import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-csharp";
 import "prismjs/components/prism-rust";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 function App() {
   const [count, setCount] = useState(0)
   const [code, setCode] = useState(`
@@ -42,7 +44,7 @@ function App() {
   async function reviewCode(){
     setLoading(true);
     // Send both code and language to the backend
-    const response = await axios.post('http://localhost:3000/ai/get-review' , { code, language });
+    const response = await axios.post(`${backendUrl}/ai/get-review` , { code, language });
     setReview(response.data);
     setLoading(false);
   }
