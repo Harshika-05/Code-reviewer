@@ -1,29 +1,11 @@
-import { useState , useEffect} from 'react'
-import "prismjs/themes/prism-tomorrow.css";
-import prism from "prismjs";
+import { useState } from 'react'
 import './App.css'
 
 import Markdown from 'react-markdown';
-
 import axios from 'axios';
-
 import rehypeHighlight from 'rehype-highlight';
-
 import "highlight.js/styles/github-dark.css";
-
 import Editor from 'react-simple-code-editor';
-
-// Import PrismJS languages dynamically if needed
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-c";
-import "prismjs/components/prism-cpp";
-import "prismjs/components/prism-go";
-import "prismjs/components/prism-ruby";
-import "prismjs/components/prism-php";
-import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-csharp";
-import "prismjs/components/prism-rust";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -37,9 +19,6 @@ function App() {
   const [review, setReview] = useState("");
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState("javascript");
-  useEffect(() =>{
-    prism.highlightAll();
-  })
 
   const handleSubmit = async () => {
     setLoading(true);
