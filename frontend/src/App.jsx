@@ -41,13 +41,13 @@ function App() {
     prism.highlightAll();
   })
 
-  async function reviewCode(){
+  const handleSubmit = async () => {
     setLoading(true);
     // Send both code and language to the backend
-    const response = await axios.post(`${backendUrl}/ai/get-review` , { code, language });
+    const response = await axios.post(`${backendUrl}/ai/get-review`, { code, language });
     setReview(response.data);
     setLoading(false);
-  }
+  };
 
   return (
     <>
@@ -99,7 +99,7 @@ function App() {
           </div>
           {/* Review button is absolutely positioned at the bottom right of the code area. */}
           <button 
-            onClick={reviewCode}
+            onClick={handleSubmit}
             className="review-btn"
             disabled={loading}
             style={{ position: 'absolute', bottom: '1rem', right: '1rem' }}
